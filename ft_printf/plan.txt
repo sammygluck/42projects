@@ -1,0 +1,145 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    plan.txt                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sgluck <marvin@42.fr>                      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/29 10:53:40 by sgluck            #+#    #+#              #
+#    Updated: 2023/01/30 17:45:56 by sgluck           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+What is the plan?
+
+1. create a minimal version of printf
+	a: takes only one argument
+	b: character
+2. find out how to use the variadic function arguments
+3. expand the function to include other elements
+4. handle all errors
+
+
+In-depth:
+- The first I would like to do is try to get a working minimal version of printf
+How would I go about this? First, I would need to make the libft available for myself as I'm probably going to rely on this throughout the project. Now, I'm going to make an extra folder with the files of libft and I would also like to make a makefile now that will compile my ft_printf file as we go along. The Makefile will compile the current function with all the functions in libft. 
+- I'm not sure if I need to compile them all together, or I can compile the libft seperately and then link the libft library with the program I'm currently writing. It seems though, from this link https://stackoverflow.com/questions/1749079/how-do-you-actually-use-a-c-library that I can compile it seperately and then include it. I'll try it now.
+- Indeed the following command works: cc ft_printf.c -I libft -L libft -lft 
+
+- Ok, now on to creating our first iteration of printf. The question is: how do we check for placeholders? Do we check for the character % and see what's after that? From the actual printf function it would seem so.
+- Before that, though, I've done some research on variadic functions. It seems we need to remember 4 parts when approaching the matter:
+	1. We need to declare a pointer of type va_list, we will use this pointer as we go along.
+	2. We need to initialize the pointer with va_start(). It takes 2 args (pointer, name of last
+	   argument passed to function)
+	3. We can now access the arguments by using va_arg(). The way I understand it is that it
+	   dereferences the pointer to the first argument and increments it afterwards. So we're 
+	   basically moving along the list of arguments with this.
+	   It takes two arguments: (the pointer of va_list, the type of the argument)
+	4. The last aspect is va_end. This is used to clean up the situation.
+	5. Don't forget to #include <stdarg.h>
+- I think there will be a few tricky parts when we'll need to implement the variadic functions in ft_printf:
+	a: how will we know how many arguments there are?
+	b: as each argument can have its own type, how will we figure that out? Or can we typecast it?
+	c: errors of too many or too few arguments also need to be dealt with
+- As a p.s.: it seems from the assignment that there's another macro that needs to be researched: va_copy. As at this point it's not necessary, I'll deal with it in the right time.
+- Now, on to writing some code: 
+The first thing I would like to do, is create a printf function that takes in 3 arguments: the amount of extra arguments, the string to add our char to, and the char.
+- We need to first check for the % sign. If we find it, we need to check what the next character is. If it's 'c', then we can print the contents of c. We also need to increment the index after printing whatever c holds.  We already begin to use the variadic functions over here. If it doesn't hold c, then we can just print the value of the index of our string, incrementing the string as we go along.
+- One error I got while starting to use the variadic function was in the following scenario:
+	va_arg(ptr, char) threw me an error as such:
+ft_printf.c:29:30: warning: second argument to 'va_arg' is of promotable type 'char'; this va_arg has undefined behavior because arguments will be promoted to 'int' [-Wvarargs]
+                                printf("%c", va_arg(ptr, char));
+check out the following link for more on this:
+https://stackoverflow.com/questions/28054194/char-type-in-va-arg
+- Another question I had when thinking about implementing the printf function, was whether to add all elements to one string and then print it all afterwards, or to print as we go along. The simplest would be just to print as we go along. 
+No memory management would be necessary for this. 
+On the other hand I wonder if it truly replicates the actual printf function. 
+Perhaps the actual printf function will throw an error if the whole thing is wrong whereas over here it could be that we print something before an error occurs. Not sure.
+- Now taking the simple route: basically it means the following:
+a: iterate through the whole string printing correctly as we iterate
+b: if it encounters a % sign, check for the letter that comes afterwards [if we need multiple letters how to deal with it]
+c: if it's a letter we know: format correctly and if it's not a letter we know, throw an error or handle correctly 
+
+Actually I'm realizing that it's pretty straightforward.
+
+
+
+
+- I also would like to discuss the format specifiers as I know that getting this down correctly is a big part of this exercise. [i.e. how do we format pointers, strings, hexadecimals, etc.]
+- So, let's list the format specifiers here:
+1. %c prints a single character
+2. %s prints a string (as defined by the common C convention [whatever that means??])
+3. %p The void * pointer argument has to be printed in hexadecimal format
+4. %d Prints a decimal (base 10) number.
+5. %i Prints an integer in base 10. (what the heck is the difference between %d & %i??)
+6. %u Prints an unsigned decimal (base 10) number.
+7. %x Prints a number in hexadecimal (base 16) lowercase format.
+8. %X Prints a number in hexadecimal (base 16) uppercase format.
+9. %% Prints a percent sign.
+
+One thing is clear from all of this: we're (luckily) only checking for one letter after the % sign.
+That makes things quite a bit simpler.
+
+The remaining question is: how?
+We'll have to use a function that will check what the format specifier is. 
+Based on that, it will call another function that will deal with the provided format specifier correctly.
+
+Another thing I would like to point out:
+There are several input options: i.e. char, int, ...
+Can all of these input options be converted to all format specifiers? Clearly not! A character isn't a string. We'll have to deal with this.
+
+On to working on the format specifiers. Let's break it down one by one.
+1. %c is quite straigtforward: just print the character provided.
+
+2. %s : take the argument, iterate through it and print it.
+
+3. %p : ok, so after a bit of research: 
+I can save the pointer in an unsigned long long/size_t variable or typecast (whatever).
+The 'point' is that it can be represented as a number. 
+Ok, that's the easy part.
+Then I must turn it into a hexadecimal character representation. How would that work? 
+It really opens up the question: how can I convert any integer into hexadecimal representation?
+That's some kind of uncharted territory so far. But not to fret. The solution is near.
+What's the solution? Not sure!
+
+Let's break this down:
+a. Every hex code starts with 0x so we can print this out already
+b. Now we need to convert int -> hex -> char
+So 1 is represented as -> 1 -> '1'. Easy.
+But 125? Or 12345? How to go about it?
+Before I continue, I remember a great tool someone told me at campus [Ryan]:
+write(1, &"0123456789ABCDEF"[number % 16], 1)
+This technique is very usefull indeed. 
+So now, we can do the same as when we used the recursion in ft_putnbr
+Let's perhaps enumerate the options:
+a. it's greater or equal to 1
+b. it's less than 16 and greater than null
+c. it's null
+d. it's less than null
+
+Usually the last two cases shouldn't happen because 0 means a null pointer and means something went wrong. And also, there aren't any negative addresses, so it doesn't make sense to have a negative number in the mix. The last two cases should be or should've been handled at some point.
+
+Ok. It seems that I've managed to implement a simple version of printing out pointers.
+
+Another thing I realized is that the original printf function has a return value. That is, the total number of characters written to our buffer i.e. the terminal/screen. 
+In other words: any character written to the screen must increment a specified number. We'll have to incorporate that into our functions.
+In simple terms it basically means that any time we print out a character, we must increment our printf function return value.
+
+4. Printing a base decimal number: how to do?
+Probably it's going to look very similar to ft_putnmbr. The only difference will be, incorporating the count of prints for our return value. In other words, we'll use the ft_printnbr, but we'll need to eventually modifiy it. 
+I won't do it yet. But I'll have to keep it in mind later when actually cleaning up the function.
+
+Ok, done the basic implemenation by just calling the ft_putnbr function. We'll have to change that later, but for now, it's good.
+
+[Note: I ran into an issue of a segmentation fault that I didn't know how to solve. I asked chatGPT and got a useful response. The idea would be to debug using gdb. 
+Here are the steps:
+1. compile the code using the -g flag
+2. start gdb with: gdb my_program
+3. set breakpoint: break main
+4. run: run
+5. next: next/n
+6. continue until next breakpoint: continue/c
+7. quit
+]
+
+
