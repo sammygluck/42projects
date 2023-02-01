@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 10:57:17 by sgluck            #+#    #+#             */
-/*   Updated: 2023/01/30 17:42:55 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/02/01 18:42:19 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,19 @@
 void	formats(va_list args, char c)
 {
 	if (c == 'c')
-	{
 		character(va_arg(args, int));
-	}
 	if (c == 's')
-	{
 		string(va_arg(args, char *));
-	}
 	if (c == 'p')
-	{
 		pointer(va_arg(args, void *));
-	}
 	if (c == 'i' || c == 'd')
-	{
 		decimal(va_arg(args, int));
-	}
 	if (c == 'u')
-	{
-		u_int(var_arg(args, unsigned int));
-	}
+		u_nbr(va_arg(args, unsigned int));
+	if (c == 'x' || c == 'X')
+		ft_hex(va_arg(args, int), c);
+	if (c == '%')
+		ft_percent();
 }
 
 void	ft_printf(int n, char *str, ...)
@@ -65,11 +59,12 @@ int	main(void)
 	char	*c;
 	void	*d;
 	int	a;
-	
-	a = 12351234;
+	char	b;
+
+	a = 31;
+	b = 'h';
 	c = ft_strdup("world");
 	d = &a;
-
-	ft_printf(1, "hello %s %p %i %d \n", c, d, a, a);
-	printf("hello %s %p %d %i", c, d, a, a);
+	ft_printf(1, "hello %s %p %x %X %% \n", c, d, b, b);
+	printf("hello %s %p %x %X %%", c, d, b, b);
 }

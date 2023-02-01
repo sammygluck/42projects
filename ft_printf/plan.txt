@@ -6,7 +6,7 @@
 #    By: sgluck <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 10:53:40 by sgluck            #+#    #+#              #
-#    Updated: 2023/01/30 17:45:56 by sgluck           ###   ########.fr        #
+#    Updated: 2023/02/01 18:46:10 by sgluck           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,7 @@ Another thing I realized is that the original printf function has a return value
 In other words: any character written to the screen must increment a specified number. We'll have to incorporate that into our functions.
 In simple terms it basically means that any time we print out a character, we must increment our printf function return value.
 
-4. Printing a base decimal number: how to do?
+4 & 5. Printing a base decimal number: how to do?
 Probably it's going to look very similar to ft_putnmbr. The only difference will be, incorporating the count of prints for our return value. In other words, we'll use the ft_printnbr, but we'll need to eventually modifiy it. 
 I won't do it yet. But I'll have to keep it in mind later when actually cleaning up the function.
 
@@ -143,3 +143,22 @@ Here are the steps:
 ]
 
 
+6. Next: %u = unsigned integer
+It seems kinda straightforward. Since there are no minus values, we don't need to check for all of that and we can just create a classic num to char function with the recursivity factor and modulus operand as in ft_putnbr.c
+It seems to work. I tested -5, 0, 10, and larger. I did not test the max numbers, though.
+
+BTW, the compile code at the moment is:
+cc  ft_printf.c formats.c pointer.c unsigned.c -I libft -L./libft -lft  && ./a.out
+
+7 & 8. Printing lowercase hex with %x and uppercase hex with %X.
+Now, over here it seems to me similar to the pointer situation. 
+I'm thinking that extra complication comes into play with the possibility of 0 and minus numbers if I'm not mistaken.
+According to chatGPT, though, if given a negative integer, it will first be converted to a unsigned int (size_t anyone?) and then be printed out as a hex value. Actually very simple.
+
+9. %% printing a percent: done
+
+
+
+- Ok, now that we've done that, we're basically done with our basic function.
+We must now modify our function to return the value of characters written. 
+The way I'm thinking of doing this, is to add to a return value for every 'write'.

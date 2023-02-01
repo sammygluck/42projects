@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pointer.c                                          :+:      :+:    :+:   */
+/*   unsigned.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 15:47:31 by sgluck            #+#    #+#             */
-/*   Updated: 2023/02/01 17:15:58 by sgluck           ###   ########.fr       */
+/*   Created: 2023/01/31 16:45:33 by sgluck            #+#    #+#             */
+/*   Updated: 2023/01/31 18:42:00 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libprintf.h"
 
-void	pointer(void *ptr)
+void	u_nbr(unsigned int nbr)
 {
-	size_t	n;
+	char	n;
 
-	n = (size_t)ptr;
-	write(1, "0x", 2);
-	print_hex(n);
+	if (nbr >= 10)
+	{
+		u_nbr(nbr / 10);
+		nbr = nbr % 10;
+	}
+	n = nbr + '0';
+	write(1, &n, 1);
 }
