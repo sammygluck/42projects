@@ -6,7 +6,7 @@
 #    By: sgluck <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 10:53:40 by sgluck            #+#    #+#              #
-#    Updated: 2023/02/01 18:46:10 by sgluck           ###   ########.fr        #
+#    Updated: 2023/02/02 13:19:13 by sgluck           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -162,3 +162,25 @@ According to chatGPT, though, if given a negative integer, it will first be conv
 - Ok, now that we've done that, we're basically done with our basic function.
 We must now modify our function to return the value of characters written. 
 The way I'm thinking of doing this, is to add to a return value for every 'write'.
+So, first we must create a return value in the actual ft_printf function. We will pass this function along as we go.
+Let's make a list of all the times we write stuff so as to know what needs modification:
+
+ft_printf.c
+1.) In the printf function itself we print out every regular character. Instead of using ft_putchar_fd, we'll use a modified function of it that on top of printing a character, will also add 1 to the return value.
+
+formats.c
+2.) In the formats.c file I'm using ft_putchar, which needs to change.
+3.) In the formats.c file the ft_pustr_fd needs to be modified
+4.) In the fomrats.c file the ft_putnbr_fd function needs to be modified
+
+ft_percent.c
+5.) I can either use the modified ft_putchar or use this function and add 1 to the return values.
+
+hex.c
+6.) both of the writing  functions need to take the return value and increment it.
+
+pointer.c
+7.) when writing 0x, we need to add +2
+
+unsigned.c
+8.) add one after writing (I'm not sure if it's just easier to use  the ft_putnbr function for this as well.
