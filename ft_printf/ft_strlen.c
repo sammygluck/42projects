@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   formats.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/29 15:44:33 by sgluck            #+#    #+#             */
-/*   Updated: 2023/01/30 16:46:56 by sgluck           ###   ########.fr       */
+/*   Created: 2023/01/11 16:00:00 by sgluck            #+#    #+#             */
+/*   Updated: 2023/01/16 15:57:04 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libprintf.h"
+#include "libft/libft.h"
 
-void	character(char c, int *retn)
+size_t	ft_strlen(const char *str)
 {
-	ft_putchar(c, retn);
-}
+	int	i;
 
-void	string(char *str, int *retn)
-{
-	ft_putstr(str, retn);
-}
-
-void	decimal(int n, int *retn)
-{
-	ft_putnbr(n, retn);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

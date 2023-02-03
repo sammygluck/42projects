@@ -184,3 +184,7 @@ pointer.c
 
 unsigned.c
 8.) add one after writing (I'm not sure if it's just easier to use  the ft_putnbr function for this as well.
+
+Now just need to change the header file. I think I'm not going to use the libft library after all.
+I also will need to make a Makefile. Honestly, I'm still not entirely sure how to go about that as I've seen errors when trying to make the program earlier.
+I guess I'll try to dive a little deeper on that one a bit later.

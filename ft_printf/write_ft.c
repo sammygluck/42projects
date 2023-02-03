@@ -1,11 +1,9 @@
-#include <stdio.h>
-#include <unistd.h>
+#include "libprintf.h"
 
-
-void	ft_putchar(char c, int *ret)
+void	ft_putchar(char c, int *retn)
 {
 	write(1, &c, 1);
-	*ret += 1;
+	*retn += 1;
 }
 
 void	ft_putstr(char *s, int *retn)
@@ -22,7 +20,7 @@ void	ft_putstr(char *s, int *retn)
 	}
 }
 
-int	ft_putnbr(int n, int *retn)
+void	ft_putnbr(int n, int *retn)
 {
 	char	nbr;
 
@@ -44,14 +42,13 @@ int	ft_putnbr(int n, int *retn)
 	}
 	nbr = n + '0';
 	ft_putchar(nbr, retn);
-	return (*retn);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	int	retn;
 
 	retn = 0;
 	printf("\n%i", ft_putnbr(-12345, &retn));
 	return (0);
-}
+}*/

@@ -14,18 +14,22 @@
 # define LIBPRINTF_H
 
 # include <stdarg.h>
-# include "libft/libft.h"
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-void	formats(va_list args, char c);
+void	formats(va_list args, char c, int *retn);
 void	ft_printf(int n, char *str, ...);
-void	character(char c);
-void	string(char *str);
-void	pointer(void *ptr);
-void	print_uhex(size_t nbr);
-void	print_hex(size_t nbr);
-void	ft_hex(int nbr, char c);
-void	decimal(int n);
-void	u_nbr(unsigned int nbr);
-void	ft_percent(void);
+void	character(char c, int *retn);
+void	string(char *str, int *retn);
+void	pointer(void *ptr, int *retn);
+void	print_uhex(size_t nbr, int *retn);
+void	print_hex(size_t nbr, int *retn);
+void	ft_hex(int nbr, char c, int *retn);
+void	decimal(int n, int *retn);
+void	u_nbr(unsigned int nbr, int *retn);
+void	ft_putchar(char c, int *retn);
+void	ft_putstr(char *s, int *retn);
+void	ft_putnbr(int n, int *retn);
 
 #endif
