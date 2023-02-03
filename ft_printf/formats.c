@@ -13,17 +13,17 @@
 #include <stdio.h>
 #include "libprintf.h"
 
-void	character(char c)
+void	character(char c, int *retn)
 {
-	ft_putchar_fd(c, 1);
+	ft_putchar(c, retn);
 }
 
-void	string(char *str)
+void	string(char *str, int *retn)
 {
-	ft_putstr_fd(str, 1);
+	ft_putstr(str, retn);
 }
 
-void	decimal(int n)
+void	decimal(int n, int *retn)
 {
-	ft_putnbr_fd(n, 1);
+	ft_putnbr(n, retn);
 }

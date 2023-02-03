@@ -12,15 +12,16 @@
 
 #include "libprintf.h"
 
-void	u_nbr(unsigned int nbr)
+void	u_nbr(unsigned int nbr, int *retn)
 {
 	char	n;
 
 	if (nbr >= 10)
 	{
-		u_nbr(nbr / 10);
+		u_nbr(nbr / 10, retn);
 		nbr = nbr % 10;
 	}
 	n = nbr + '0';
 	write(1, &n, 1);
+	*retn += 1;
 }

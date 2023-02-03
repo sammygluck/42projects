@@ -12,7 +12,7 @@
 
 #include "libprintf.h"
 
-void	print_hex(size_t nbr)
+void	print_hex(size_t nbr, int *retn)
 {
 	if (nbr > 15)
 	{
@@ -20,9 +20,10 @@ void	print_hex(size_t nbr)
 		nbr = nbr % 16;
 	}
 	write(1, &"0123456789abcdef"[nbr % 16], 1);
+	*retn += 1;
 }
 
-void	print_uhex(size_t nbr)
+void	print_uhex(size_t nbr, int *retn)
 {
 	if (nbr > 15)
 	{
@@ -30,15 +31,16 @@ void	print_uhex(size_t nbr)
 		nbr = nbr % 16;
 	}
 	write(1, &"0123456789ABCDEF"[nbr % 16], 1);
+	*retn += 1;
 }
 
-void	ft_hex(int nbr, char c)
+void	ft_hex(int nbr, char c, int *retn)
 {
 	size_t	n;
 
 	n = (size_t)nbr;
 	if (c == 'x')
-		print_hex(n);
+		print_hex(n, retn);
 	if (c == 'X')
-		print_uhex(n);
+		print_uhex(n, retn);
 }

@@ -12,11 +12,12 @@
 
 #include "libprintf.h"
 
-void	pointer(void *ptr)
+void	pointer(void *ptr, int *retn)
 {
 	size_t	n;
 
 	n = (size_t)ptr;
 	write(1, "0x", 2);
-	print_hex(n);
+	*retn += 2;
+	print_hex(n, retn);
 }
