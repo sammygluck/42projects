@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libprintf.h                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:56:15 by sgluck            #+#    #+#             */
-/*   Updated: 2023/02/01 18:39:02 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:28:43 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+int		ft_printf(const char *str, ...);
 void	formats(va_list args, char c, int *retn);
-int	ft_printf(const char *str, ...);
 void	character(char c, int *retn);
 void	string(char *str, int *retn);
 void	pointer(void *ptr, int *retn);

@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:47:31 by sgluck            #+#    #+#             */
-/*   Updated: 2023/02/01 17:15:58 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:28:05 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	print_pointer(unsigned long nbr, int *retn)
 void	pointer(void *ptr, int *retn)
 {
 	unsigned long	n;
-	
+
 	if (!ptr)
 		ft_putstr("(nil)", retn);
 	else
 	{
-	n = (unsigned long)ptr;
-	write(1, "0x", 2);
-	*retn += 2;
-	print_pointer(n, retn);
+		n = (unsigned long)ptr;
+		write(1, "0x", 2);
+		*retn += 2;
+		print_pointer(n, retn);
 	}
 }

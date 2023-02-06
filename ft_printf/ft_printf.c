@@ -6,12 +6,11 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 10:57:17 by sgluck            #+#    #+#             */
-/*   Updated: 2023/02/01 18:42:19 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:30:00 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-//#include "libft/libft.h"
 #include <stdio.h>
 
 void	formats(va_list args, char c, int *retn)
@@ -34,10 +33,10 @@ void	formats(va_list args, char c, int *retn)
 
 int	ft_printf(const char *str, ...)
 {
+	int		*retn;
 	int		i;
+	int		ret_value;
 	va_list	ptr;
-	int	ret_value;
-	int 	*retn;
 
 	ret_value = 0;
 	retn = &ret_value;
