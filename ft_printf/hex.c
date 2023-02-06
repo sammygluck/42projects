@@ -10,35 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libprintf.h"
+#include "ft_printf.h"
 
-void	print_hex(size_t nbr, int *retn)
+void	print_hex(unsigned int nbr, int *retn)
+
 {
 	if (nbr > 15)
 	{
-		print_hex(nbr / 16);
+		print_hex(nbr / 16, retn);
 		nbr = nbr % 16;
 	}
 	write(1, &"0123456789abcdef"[nbr % 16], 1);
 	*retn += 1;
 }
 
-void	print_uhex(size_t nbr, int *retn)
+void	print_uhex(unsigned int nbr, int *retn)
 {
 	if (nbr > 15)
 	{
-		print_uhex(nbr / 16);
+		print_uhex(nbr / 16, retn);
 		nbr = nbr % 16;
 	}
 	write(1, &"0123456789ABCDEF"[nbr % 16], 1);
 	*retn += 1;
 }
 
-void	ft_hex(int nbr, char c, int *retn)
+void	ft_hex(unsigned int nbr, char c, int *retn)
 {
-	size_t	n;
+	unsigned int	n;
 
-	n = (size_t)nbr;
+	n = nbr;
 	if (c == 'x')
 		print_hex(n, retn);
 	if (c == 'X')

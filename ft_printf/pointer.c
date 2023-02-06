@@ -10,14 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libprintf.h"
+#include "ft_printf.h"
+#include <stdio.h>
+#include <limits.h>
+
+void	print_pointer(unsigned long nbr, int *retn)
+
+{
+	if (nbr > 15)
+	{
+		print_pointer(nbr / 16, retn);
+		nbr = nbr % 16;
+	}
+	write(1, &"0123456789abcdef"[nbr % 16], 1);
+	*retn += 1;
+}
 
 void	pointer(void *ptr, int *retn)
 {
-	size_t	n;
-
-	n = (size_t)ptr;
+	unsigned long	n;
+	
+	if (!ptr)
+		ft_putstr("(nil)", retn);
+	else
+	{
+	n = (unsigned long)ptr;
 	write(1, "0x", 2);
 	*retn += 2;
-	print_hex(n, retn);
+	print_pointer(n, retn);
+	}
 }

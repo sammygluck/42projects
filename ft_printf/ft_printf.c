@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libprintf.h"
-#include "libft/libft.h"
+#include "ft_printf.h"
+//#include "libft/libft.h"
 #include <stdio.h>
 
 void	formats(va_list args, char c, int *retn)
@@ -27,22 +27,22 @@ void	formats(va_list args, char c, int *retn)
 	if (c == 'u')
 		u_nbr(va_arg(args, unsigned int), retn);
 	if (c == 'x' || c == 'X')
-		ft_hex(va_arg(args, int), c, retn);
+		ft_hex(va_arg(args, unsigned int), c, retn);
 	if (c == '%')
 		ft_putchar('%', retn);
 }
 
-int	ft_printf(int n, char *str, ...)
+int	ft_printf(const char *str, ...)
 {
 	int		i;
 	va_list	ptr;
 	int	ret_value;
 	int 	*retn;
 
-	re_value = 0;
+	ret_value = 0;
 	retn = &ret_value;
-
 	va_start(ptr, str);
+	i = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
@@ -61,17 +61,19 @@ int	ft_printf(int n, char *str, ...)
 	return (ret_value);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	char	*c;
-	void	*d;
+	//void	*d;
 	int	a;
-	char	b;
+	//char	b;
 
 	a = 31;
-	b = 'h';
+	//b = 'h';
 	c = ft_strdup("world");
-	d = &a;
-	ft_printf(1, "hello %s %p %x %X %% \n", c, d, b, b);
-	printf("hello %s %p %x %X %%", c, d, b, b);
-}
+	//d = &a;
+	ft_printf("a\n");
+	printf("%i\n",ft_printf("hello %i %s %% \n", a, c));
+	printf("%i", printf("hello %i %s %% \n", a, c));
+	free (c);
+}*/

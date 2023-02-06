@@ -1,4 +1,4 @@
-#include "libprintf.h"
+#include "ft_printf.h"
 
 void	ft_putchar(char c, int *retn)
 {
@@ -11,7 +11,7 @@ void	ft_putstr(char *s, int *retn)
 	int	i;
 
 	if (!s)
-		return ;
+		s = "(null)";
 	i = 0;
 	while (s[i])
 	{
