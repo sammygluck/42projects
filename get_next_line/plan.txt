@@ -68,3 +68,14 @@ For read() that shouldn't be an issue, but for us, we'll probably need to use st
 Let's speak it out:
 We grab hold of our buffer in a seperate string. We check for newline. 
 If found: great, we can print out the string. But no, not so fast, what happens to the parts after the newline. How can we retain accuracy with half strings.
+
+So, the solution would be the following:
+1. read buffer into new string (append mode)
+2. check new string for \n
+3. if found: 
+	a: copy bytes into char *next_line
+	b: do some cleanup (i.e. move pointer)
+4. if not found:
+	a: continue reading buffer and appending
+5. this whole process should continue until:
+	a: the file has reached its end
