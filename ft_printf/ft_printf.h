@@ -17,6 +17,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 int		ft_printf(const char *str, ...);
 void	formats(va_list args, char c, int *retn);
