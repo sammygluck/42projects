@@ -1,0 +1,81 @@
+Introduction:
+This project is called get_next_line. 
+We must create a function that:
+a: reads a line from a file descriptor
+b: allocates that line to piece of memory 
+c: returns that piece of memory
+
+Some challenges:
+a: when to stop?
+	- eof
+	- \n
+b: what is meant by buffer? does that affect when to stop?
+
+Ok, some answers:
+What is meant by buffer:
+read() takes three arguments: 1.) fd ; 2.) buffer (which is a char *) 3.) sizeof buffer
+We can define at compilation time a macro called BUFFER_SIZE, that can be used:
+a.) when declaring the variable buffer: char buffer[BUFFER_SIZE]
+b.) for the third argument in read
+
+In order to define this macro at compilation time, we must add -D name=value
+
+I will also provide here some sample code from chatGPT on how to use open(), read() and close().
+
+
+#include <fcntl.h>
+#include <unistd.h>
+
+#define BUFFER_SIZE 4
+
+int main(void) {
+    int fd = open("file.txt", O_RDONLY);
+    if (fd == -1) {
+        // handle error
+    }
+    char buffer[BUFFER_SIZE];
+    int bytes_read = read(fd, buffer, BUFFER_SIZE);
+    if (bytes_read == -1) {
+        // handle error
+    }
+    if (close(fd) == -1) {
+        // handle error
+    }
+    // use the data in buffer
+    return 0;
+}
+
+
+---------------------------------------------
+
+Ok, we're past the first building blocks of understanding how the read() function works.
+Now, we need to be able to implement it in our function. Some of the things we need to keep in mind:
+- Our goal is to return a line from our file. 
+- The way we do that is by reading until we arrive to a newline.
+	- I'm not sure if the checking for \n happens at read() level 
+	- or in seperate string level
+	- if it would happen on read() level, we would need to 
+		- set buffersize to 1
+		- use BUFFER_SIZE as the length of perhaps a while loop
+	- if it would happen on string level, we would need to
+		- make sure to allocate enough memory (buffer_size)
+		- what would happen if \n is found after say 7 calls to read()?
+
+- Another goal is to retain our status when the function returns, so that we can call get_next_line() over and over.
+For read() that shouldn't be an issue, but for us, we'll probably need to use static functions/variables.
+
+
+Let's speak it out:
+We grab hold of our buffer in a seperate string. We check for newline. 
+If found: great, we can print out the string. But no, not so fast, what happens to the parts after the newline. How can we retain accuracy with half strings.
+
+So, the solution would be the following:
+1. read buffer into new string (append mode)
+2. check new string for \n
+3. if found: 
+	a: copy bytes into char *next_line
+	b: do some cleanup (i.e. move pointer)
+4. if not found:
+	a: continue reading buffer and appending
+5. this whole process should continue until:
+	a: the file has reached its end
