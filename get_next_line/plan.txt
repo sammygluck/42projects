@@ -67,4 +67,11 @@ For read() that shouldn't be an issue, but for us, we'll probably need to use st
 
 Let's speak it out:
 We grab hold of our buffer in a seperate string. We check for newline. 
-If found: great, we can print out the string. But no, not so fast, what happens to the parts after the newline. How can we retain accuracy with half strings.
+If found: great, we can print out the string. But no, not so fast, what happens to the parts after the newline. How can we retain accuracy with half strings?
+
+Let's say buffer is 1 and newline is 5 calls of read(). So we join the buffer into a new string, let's call it string1. We check the string1 for a newline.
+If present we copy the values of string1 into our final get_next_line string moving up the pointer of string1. If not we call the buffer again, adding to our string1. 
+Check if there is a newline. If yes, then copy and move up pointer.
+If not, then call read again in buffer, copy buffer into string1, check string1 for newline, continue...
+
+Memory allocation would 
