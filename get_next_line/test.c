@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:11:44 by sgluck            #+#    #+#             */
-/*   Updated: 2023/02/09 13:17:26 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:22:59 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*ft_strjoin(char *buffer, char *middle)
 		i++;
 		j++;
 	}
+	free(middle);
 	new_string[i] = 0;
 	return (new_string);
 }
@@ -90,6 +91,10 @@ char	*get_next_line(int fd)
 	
 	if (!middle)
 		middle = malloc(BUFFER_SIZE);
+	if (!middle)
+	{
+		return (NULL);
+	}
 	while (!check_newline(middle))
 	{
 		buffer = malloc(BUFFER_SIZE);
@@ -97,6 +102,7 @@ char	*get_next_line(int fd)
 		if (track == 0)
 			return (NULL);
 		middle = ft_strjoin(buffer, middle);
+			return (NULL);
 	}
 	next_line = malloc(ft_strlen(middle) + 1);
 	middle = ft_strcpy(next_line, middle);

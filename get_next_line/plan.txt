@@ -82,7 +82,12 @@ So, the solution would be the following:
 
 -----------------------------------------------
 
-Ok, so somehow I'm running into issues after implementation. The current implementation is:
-1. set char buffer, next_line and static char middle
-2. check if !middle and if middle mallocs buffersize to middle (honestly, I don't think this is the right implementation.
-3. 
+I've seemed to get a working version, but need to still refine and perfect.
+The first thing I would like to write out is the hierarchy of functions:
+1. main
+2. get_next_line
+3. malloc		checknewline		read		ft_strjoin		ft_strlen		ft_strcpy
+4. 												malloc
+												ft_strlen
+
+The reason for this is in order to keep track of all the return values that need to be dealt with, especially in cases of error
