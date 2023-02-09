@@ -1,0 +1,3 @@
+Ok, we're past the first building blocks of understanding how the read() function works.
+Now, we need to be able to implement it in our function. Some of the things we need to keep in mind:
+- Our goal is to return a line from our file.

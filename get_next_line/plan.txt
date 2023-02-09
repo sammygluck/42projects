@@ -79,3 +79,10 @@ So, the solution would be the following:
 	a: continue reading buffer and appending
 5. this whole process should continue until:
 	a: the file has reached its end
+
+-----------------------------------------------
+
+Ok, so somehow I'm running into issues after implementation. The current implementation is:
+1. set char buffer, next_line and static char middle
+2. check if !middle and if middle mallocs buffersize to middle (honestly, I don't think this is the right implementation.
+3. 

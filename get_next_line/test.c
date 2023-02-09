@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:11:44 by sgluck            #+#    #+#             */
-/*   Updated: 2023/02/08 17:49:13 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/02/09 13:17:26 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,21 @@ char	*get_next_line(int fd)
 	char	*buffer;
 	static char	*middle;
 	char	*next_line;
+	int		track;
 	
 	if (!middle)
 		middle = malloc(BUFFER_SIZE);
-	read(fd, middle, BUFFER_SIZE);
 	while (!check_newline(middle))
 	{
 		buffer = malloc(BUFFER_SIZE);
-		read(fd, buffer, BUFFER_SIZE);
+		track = read(fd, buffer, BUFFER_SIZE);
+		if (track == 0)
+			return (NULL);
 		middle = ft_strjoin(buffer, middle);
 	}
 	next_line = malloc(ft_strlen(middle) + 1);
 	middle = ft_strcpy(next_line, middle);
-	printf("This is middle %s \n", middle);
+//	printf("This is middle %s \n", middle);
 	return (next_line);
 }
 
@@ -111,9 +113,13 @@ int	main(void)
 	printf("This is the fd: %i \n", fd);
 	printf("This is the BUFFER_SIZE: %i \n", BUFFER_SIZE);
 	buffer = get_next_line(fd);
-	printf("This is the returned buffer: %s", buffer);
-	buffer = get_next_line(fd);
-	printf("This is the returned buffer: %s", buffer);
+	while (buffer)
+	{
+		printf("%s", buffer);
+		buffer = get_next_line(fd);
+	}
+	/*buffer = get_next_line(fd);
+	printf("This is the returned buffer: %s", buffer);*/
 	free(buffer);
 	close(fd);
 	return (0);
