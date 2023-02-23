@@ -90,4 +90,100 @@ The first thing I would like to write out is the hierarchy of functions:
 4. 												malloc
 												ft_strlen
 
-The reason for this is in order to keep track of all the return values that need to be dealt with, especially in cases of error
+The reason for this is in order to keep track of all the return values that need to be dealt with, especially in cases of error.
+
+--------------------------------------------------
+
+I'm getting constant errors because of free and I don't know what I'm doing wrong.
+So frustrating!!
+I'm therefore planning of rethinking the whole project and doing it again step by step.
+Let's go:
+---------------------------------------
+
+1.We want to read a file line by line. 
+2.We have a buffersize to read each time.
+3.We need to return a newline each time the function is called.
+4.If we read more than up until the newline, we must make sure to save up to the 
+newline in the 'next_line' variable.
+5.We then must store all the read bytes in a static variable.
+6.We must also clean the static variable from the line up until now.
+7.This continues up until we reach the end i.e. 0 read bytes or until an error is encountered.
+
+------------------
+An error could be:
+a. an empty string passed to a function
+b. malloc returned a NULL pointer
+c. the fd is not correct 
+	1. fd < 0
+d. read returns -1
+
+------------------
+Some potential cleanup ways for the static variable:
+a. Move the pointer up: len(next_line)/until newline is found/
+b. Create a new string that copies only the bytes that don't include the newstring
+	1. either by + len(new_string)
+	2. or by using ft_substring that returns pointer location from found substring
+
+------------------
+
+Method for making sure that each read is going to concatenate to string:
+a. strjoin
+b. linked list?
+
+------------------
+
+Method for extracting next_line from static char var:
+a. strcpy [copies all values from static to next_line and cleans static]
+	1. copies up until including a newline
+	2.
+
+This will only be activated once we find a newline.
+That means that every time buffer is copied in the static var, we must make checks:
+- for newline
+
+-----------------
+
+When reading into buffer, we must make sure that buffer is empty. 
+The reason being, if the read bytes is shorter than buffer, 
+we will get old bytes in our static variable.
+Ways of doing this:
+a. bzero
+b. creating a new buffer variable each time
+
+-----------------
+
+Every time we malloc we must make sure to free()
+[unless it's the job of the main function to do so]
+
+-----------------
+
+Difference between first call of get_next_line & subsequent calls
+1.
+first: static char is empty
+second: static char might have chars
+
+------ 
+
+Difference between middle calls of get_next_line & last call
+1.
+middle: read_chars > 0
+last: read_chars = 0
+
+------
+
+Difference between first call to copy length of buffer in static char with future ones
+1. 
+first: static char is length of BUFFER_SIZE or smaller
+subsequent: static char can be larger than BUFFER_SIZE
+
+------
+
+Things that always stay the same:
+1. The BUFFER_SIZE to be read
+2. 
+
+Things that can vary:
+1. length of static char
+2. how many '\n' there are in a read buffer
+3. if there is a '\n' in the static char
+4. 
