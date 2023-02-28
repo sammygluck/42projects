@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:22:36 by sgluck            #+#    #+#             */
-/*   Updated: 2023/02/27 19:10:02 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/02/28 17:46:18 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,15 @@ char	*ft_strjoin(char *stock, char *buffer)
 
 	new = malloc(ft_strlen(stock) + ft_strlen(buffer) + 1);
 	if (!new)
+	{	
+		free(stock);
 		return (NULL);
+	}
+	if (!stock)
+	{
+		stock = malloc(1);
+		stock[0] = '\0';
+	}
 	i = 0;
 	while (stock[i])
 	{
