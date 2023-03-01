@@ -1,3 +1,1 @@
-john: hello, my name is john and it's nice to meet you.
-al: hey there, I'm al, nice to meet you.
-john: have a nice day
+01234567890123456789012345678901234567890

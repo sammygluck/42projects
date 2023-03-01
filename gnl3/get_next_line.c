@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:22:24 by sgluck            #+#    #+#             */
-/*   Updated: 2023/02/28 17:41:34 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:54:30 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -28,7 +28,7 @@ char	*clean(char *stock)
 		free(stock);
 		return (NULL);
 	}
-	if (stock[i - 1] == '\0')
+	if (stock[i] == '\0')
 	{
 		cleaned[0] = '\0';
 		free (stock);
@@ -52,6 +52,8 @@ char	*extract(char *stock)
 	int		i;
 
 	i = 0;
+	if (!stock[i])
+		return (NULL);
 	while (stock[i] && stock[i] != '\n')
 		i++;
 	if (stock[i] == '\n')
@@ -86,13 +88,13 @@ char	*reader(int fd, char *stock)
 	while (!check_newline(stock) && read_ch > 0)
 	{
 		read_ch = read(fd, buffer, BUFFER_SIZE);
-		if (read_ch <= 0)
+		if (read_ch < 0)
 		{
 			free(stock);
 			free(buffer);
 			return (NULL);
 		}
-		buffer[BUFFER_SIZE] = '\0';
+		buffer[read_ch] = '\0';
 		stock = ft_strjoin(stock, buffer);
 	}
 	free(buffer);
@@ -104,11 +106,11 @@ char	*get_next_line(int fd)
 	static char	*stock;
 	char		*next_line;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	stock = reader(fd, stock);
 	if (!stock)
-	{
 		return (NULL);
-	}
 	next_line = extract(stock);
 	if (!next_line)
 	{
@@ -124,7 +126,7 @@ char	*get_next_line(int fd)
 	return (next_line);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	int		fd;
 	char	*next_line;
@@ -137,4 +139,4 @@ int	main(void)
 	}
 	if (next_line)
 		free(next_line);
-}
+}*/
