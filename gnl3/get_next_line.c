@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:22:24 by sgluck            #+#    #+#             */
-/*   Updated: 2023/03/01 17:54:30 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/03/02 19:36:01 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -20,27 +20,21 @@ char	*clean(char *stock)
 	i = 0;
 	while (stock[i] && stock[i] != '\n')
 		i++;
-	if (stock[i] == '\n')
-		i++;
-	cleaned = malloc(ft_strlen(stock) - i + 1);
+	if (stock[i] == '\0')
+	{
+		free (stock);
+		return (NULL);
+	}
+	i++;
+	cleaned = malloc(ft_strlen(stock) - i + 2);
 	if (!cleaned)
 	{
 		free(stock);
 		return (NULL);
 	}
-	if (stock[i] == '\0')
-	{
-		cleaned[0] = '\0';
-		free (stock);
-		return (cleaned);
-	}
 	j = 0;
 	while (stock[i])
-	{
-		cleaned[j] = stock[i];
-		i++;
-		j++;
-	}
+		cleaned[j++] = stock[i++];
 	cleaned[j] = '\0';
 	free(stock);
 	return (cleaned);
@@ -61,12 +55,9 @@ char	*extract(char *stock)
 	extracted = malloc(i + 1);
 	if (!extracted)
 		return (NULL);
-	i = 0;
-	while (stock[i] && stock[i] != '\n')
-	{
+	i = -1;
+	while (stock[++i] && stock[i] != '\n')
 		extracted[i] = stock[i];
-		i++;
-	}
 	if (stock[i] == '\n')
 	{
 		extracted[i] = stock[i];
