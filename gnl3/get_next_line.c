@@ -90,7 +90,8 @@ char	*reader(int fd, char *stock)
 		read_ch = read(fd, buffer, BUFFER_SIZE);
 		if (read_ch < 0)
 		{
-			free(stock);
+			if (stock)
+				free(stock);
 			free(buffer);
 			return (NULL);
 		}
@@ -112,17 +113,7 @@ char	*get_next_line(int fd)
 	if (!stock)
 		return (NULL);
 	next_line = extract(stock);
-	if (!next_line)
-	{
-		free(stock);
-		return (NULL);
-	}
 	stock = clean(stock);
-	if (!stock)
-	{
-		free(next_line);
-		return (NULL);
-	}
 	return (next_line);
 }
 
