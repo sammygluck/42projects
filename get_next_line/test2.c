@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   test2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:11:44 by sgluck            #+#    #+#             */
-/*   Updated: 2023/02/26 15:59:00 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:22:59 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ char	*ft_strjoin(char *buffer, char *middle)
 		i++;
 		j++;
 	}
+	free(middle);
 	new_string[i] = 0;
-	free (middle);
-	middle = new_string;
 	return (new_string);
 }
 
@@ -67,13 +66,10 @@ int	check_newline(char *middle)
 	return (0);
 }
 
-char	*ft_strcpy(char *next_line, char **mid)
+char	*ft_strcpy(char *next_line, char *middle)
 {
 	int	i;
-	char	*middle;
-	char	*new;
 
-	middle = *mid;
 	i = 0;
 	while (middle[0] != '\n')
 	{
@@ -83,32 +79,34 @@ char	*ft_strcpy(char *next_line, char **mid)
 	next_line[i++] = '\n';
 	next_line[i] = 0;
 	middle++;
-	*mid = middle;
-	return (*mid);
+	return (middle);
 }
 
 char	*get_next_line(int fd)
 {
+	char	*buffer;
 	static char	*middle;
-	char		*buffer;
-	char		*next_line;
-	int			track;
-
+	char	*next_line;
+	int		track;
+	
 	if (!middle)
-		middle = malloc(BUFFER_SIZE + 1);
+		middle = malloc(BUFFER_SIZE);
 	if (!middle)
+	{
 		return (NULL);
+	}
 	while (!check_newline(middle))
 	{
-		buffer = malloc(BUFFER_SIZE + 1);
+		buffer = malloc(BUFFER_SIZE);
 		track = read(fd, buffer, BUFFER_SIZE);
 		if (track == 0)
 			return (NULL);
-		printf("pointer middle: %p \n", middle);
 		middle = ft_strjoin(buffer, middle);
+			return (NULL);
 	}
 	next_line = malloc(ft_strlen(middle) + 1);
-	middle = ft_strcpy(next_line, &middle);
+	middle = ft_strcpy(next_line, middle);
+//	printf("This is middle %s \n", middle);
 	return (next_line);
 }
 
