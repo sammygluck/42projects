@@ -1,0 +1,87 @@
+PUSHSWAP
+
+------------------------------------------------
+
+Allowed actions:
+1. Swapping top of stack
+	a. swap a
+	b. swap b
+	c. swap a & b
+2. Pushing from one to the other
+	a. push a
+	b. push b
+3. Rotating (first becomes last)
+	a. rotate a 
+	b. rotate b
+	c. rotate a & b
+4. Reverse Rotate (last becomes first)
+	a. reverse rotate a
+	b. reverse rotate b
+	c. reverse rotate a & b
+-------------------------------------------------
+
+In order to solve this, I would first like to research some of the sorting
+algorithms around, even though this excercise is specifically about stack 
+sorting algorithms. I will do this in another text file.
+
+Another point worth mentioning is that there are really a few problems to solve:
+1. How do I save the input stack so that I can use it best? Some options:
+	a. linked list
+	b. array
+2. How do I use the allowed actions for sorting?
+3. How can I maximize the efficiency of sorting using those actions?
+4. How do I convert the allowed actions into code?
+
+-------------------------------------------------
+
+To me it seems kinda clear that not all actions are needed. (at least so I think)
+For example, 1C, 3C & 4C might not be needed (again, it could depend on the implementation.)
+
+-------------------------------------------------
+
+As far as algorithms is concerned:
+The simplest algorithm that will work but will be incorrect:
+find the lowest number on stack A
+get it to the top push to stack B
+rinse & repeat until end of stack A
+push everything back to stack A
+
+The amounts of unnecessary ra actions make this very inefficient, but gives an idea
+of how the stack can become sorted using the actions given.
+
+--------------------------------------------------
+
+From what I understood from others, is that I need to further research:
+- Radix sorting algorithm
+- Simplifying the stack (i.e 18, 7, 21 -> 2, 1, 3) 
+if simplifying the stack would be necessary, the following things to watch out for:
+	- How can I do it without losing the position of values.
+
+--------------------------------------------------
+
+I saw online someone who implemented the following:
+- find the median
+- anything above stays in stack, anything below goes in B
+- find the median again
+- continue with steps until stack A is down to 1-2 elements
+- put stack A in order
+- start pushing from B back to A whilst sorting
+- this all by keeping track of the stack frames
+
+---------------------------------------------------
+
+Similarly another method, implemented something similar but instead of keeping on
+cutting the stack in two, they did something else:
+- if the stack is the size of 5 -> solve one way
+- if the stack is the size of 100 -> solve another way (split the stack in two)
+- if the stack is the size of 500 -> solve another way (split the stack in four)
+
+---------------------------------------------------
+
+What are my thoughts on all of this (i.e. the algorithm section):
+- I definitely think that breaking the stack in multiple pieces is a great idea.
+- I'm still uncertain what the best way of actually sorting is
+- Another important point that became clear when watching someone's project on 
+  YouTube:
+	- I can do a million permutations behind the scenes, as long as the sequence
+	  of the instructions is sound (ex.: I can quicksort to find the median)
