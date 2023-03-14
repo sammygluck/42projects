@@ -85,3 +85,58 @@ What are my thoughts on all of this (i.e. the algorithm section):
   YouTube:
 	- I can do a million permutations behind the scenes, as long as the sequence
 	  of the instructions is sound (ex.: I can quicksort to find the median)
+
+---------------------------------------------------
+
+Another few questions that need to be answered along the way:
+- Which data structure to use for the stacks (arrays, linked lists)
+	- I've seen the use of a doubly-circular linked list
+	- As I've never used linked lists, it will need to be researched
+- Before the actual sorting happens, what kind of initializing is necessary
+	- pre-sorting to find median?
+	- simplifying the stack
+	- error checking; is the stack valid?
+	- parsing the stack (seperating the values and atoi'ing the stack)
+	- check if the stack is already sorted
+
+---------------------------------------------------
+
+Implementation of the allowed actions will also depend on the data structure chosen
+for the stacks. Examples:
+
+sa/sb:
+Swapping an integer in an array is simple by using a temporary var,
+however, how does this work in a linked list?
+
+ra/rb/rra/rrb:
+Adding to the beginning/end of linked lists might be doable, but how do you do that
+in an array.
+
+---------------------------------------------------
+
+Also, another issue in arrays: since the amount of data coming in is dynamic, the
+numbers coming into our stack needs to be counted before placing it in an array as
+we can only allocate an array once we know the length of the data we're putting in it.
+
+On the other hand, this isn't such an issue with linked lists.
+
+---------------------------------------------------
+
+Let's give a try to create a map of how this project should be built:
+
+1. Input processing
+	a. conversions
+	b. simplifications
+2. Initialize the stacks (i.e. create stacks and put info in them)
+3. Stack actions
+4. Algorithm
+	a. if sorted
+	b. find middle/quarter
+	c. push in 'roughly right order' until reached middle
+	d. find middle/quarter...
+	e. push back with sorting
+	f. keep track of stack frames
+5. Check functions
+	a. check if already sorted	
+
+----------------------------------------------------
