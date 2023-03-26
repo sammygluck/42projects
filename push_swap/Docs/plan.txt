@@ -140,3 +140,23 @@ Let's give a try to create a map of how this project should be built:
 	a. check if already sorted	
 
 ----------------------------------------------------
+
+So we're a few weeks later and this is what I've got so far:
+1. I've decided to use linked lists because:
+	a. I've heard it's the better option for this project
+	b. I would finally like to wrap my head around this topic
+2. So, at this point, my program can take a string with numbers and output the numbers
+as actual numbers which will be added one at a time to a new node on the linked list.
+3. This is the way we initialize stack_a. Stack_b will be set to null.
+4. Furthermore, I've got some basic actions for the two stacks, such as rotate,
+reverse_rotate, swap & push. These are things we can further build on.
+5. I've also created a Makefile (with the help of ChatGPT) which will save the
+sourcefiles, object files and binary each in seperate files.
+The seperation gives the project more organization and the creation of the Makefile
+allows for me to easily integrate new files and functions in the project with easy 
+testing. (There's also a header file).
+
+What is there left to do?
+1. The actual algorithm
+2. Finetuning the action section
+3. Function to check if the stack is already sorted.

@@ -23,14 +23,6 @@ int	main(int argc, char **argv)
 	//count = count_numbers(argv[1]);
 	stack_a = stack_a_init(argv[1], &stack_a);
 	stack_b = NULL;
-	print_list(stack_a);
-	print_list(stack_b);
-	reverse_rotate(&stack_a);
-	print_list(stack_a);
-	push(&stack_a, &stack_b);
-	print_list(stack_a);
-	print_list(stack_b);
-	free_list(stack_a);
-	free_list(stack_b);
+	
 	return (0);
 }
