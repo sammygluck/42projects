@@ -13,7 +13,7 @@ typedef struct node
 	struct	node *prev;
 } node;
 
-node *create_node(int data);.
+node *create_node(int data);
 node *stack_a_init(char *string, node **head);
 void begin_insert(node **head, int data);
 void end_insert(node **head, int data);

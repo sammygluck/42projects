@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:05:18 by sgluck            #+#    #+#             */
-/*   Updated: 2023/03/15 18:20:19 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/03/26 12:00:49 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	main(int argc, char **argv)
 {
-	int		count;
+	//int		count;
 	node	*stack_a;
 	node	*stack_b;
 
 	if (argc < 2)
 		printf("USAGE: %s <\" string of numbers \">\n", argv[0]);
-	count = count_numbers(argv[1]);
+	//count = count_numbers(argv[1]);
 	stack_a = stack_a_init(argv[1], &stack_a);
 	stack_b = NULL;
 	print_list(stack_a);
@@ -32,6 +32,5 @@ int	main(int argc, char **argv)
 	print_list(stack_b);
 	free_list(stack_a);
 	free_list(stack_b);
-
 	return (0);
 }

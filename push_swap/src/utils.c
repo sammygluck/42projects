@@ -45,29 +45,29 @@ int	ft_atoi(const char *str)
 
 char *ft_strtok(char *str, char delim)
 {
-    static char *start;
-    char *token;
+	static char *start;
+	char *token;
 
-    if (str != NULL)
-        start = str;
+	if (str != NULL)
+		start = str;
 	if (start == NULL || *start == '\0')
-        return (NULL);
+		return (NULL);
 	while (*start == delim)
-        start++;
+		start++;
 	if (*start == '\0')
-    {
-        start = NULL;
-        return (NULL);
-    }
+	{
+		start = NULL;
+		return (NULL);
+	}
 	token = start;
 	while (*start != '\0' && *start != delim)
-        start++;
+		start++;
 	if (*start != '\0')
-    {
-        *start = '\0';
-        start++;
-    }
-    else
-        start = NULL;
+	{
+		*start = '\0';
+		start++;
+	}
+	else
+		start = NULL;
 	return (token);
 }
