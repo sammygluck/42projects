@@ -12,6 +12,8 @@
 
 #include "push_swap.h"
 
+
+
 int	main(int argc, char **argv)
 {
 	//int		count;
@@ -23,6 +25,10 @@ int	main(int argc, char **argv)
 	//count = count_numbers(argv[1]);
 	stack_a = stack_a_init(argv[1], &stack_a);
 	stack_b = NULL;
-	
+	print_list(stack_a);
+	push_swap_algorithm(&stack_a, &stack_b);
+	print_list(stack_a);
+	free_list(stack_a);
+	free_list(stack_b);
 	return (0);
 }
