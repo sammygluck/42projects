@@ -37,7 +37,8 @@ void reverse_rotate(node **stack)
 	node *prev;
 	node *last;
 
-    if (!*stack || !(*stack)->next) return;
+    if (!*stack || !(*stack)->next) 
+		return ;
     prev = NULL;
     last = *stack;
     while (last->next)

@@ -160,3 +160,20 @@ What is there left to do?
 1. The actual algorithm
 2. Finetuning the action section
 3. Function to check if the stack is already sorted.
+
+--------------------------
+
+Ok, so I'm finally at the stage where I can work on the algorithm.
+There are two options ahead:
+1. Use the break into pieces algorithm 
+2. Use Radix
+
+Either way, I would like to have a function that simplifies the stack.
+How to go about it?
+What does it mean?
+1. it means: let's say 7,2, 4 will be replaced with 3,1,2
+2. One implementation would be:
+	a: count how many there are.
+	b: check for the highest
+	c: replace with number
+	d: 
